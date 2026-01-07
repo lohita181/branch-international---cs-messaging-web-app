@@ -10,3 +10,5 @@ const messageSchema = new mongoose.Schema({
     createdAt: {type:Date, default:Date.now},
     repliedAt: Date
 })
+
+export default mongoose.model("Message", messageSchema);

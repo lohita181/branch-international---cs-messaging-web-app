@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import morgan from 'morgan';
 import cors from 'cors';
 import 'dotenv/config'
+import messageRoutes from "./routes/messageRoutes.js"
 
 // app
 const app = express();
@@ -19,10 +20,11 @@ mongoose.connect(process.env.MONGO_URI, {
 
 
 //  middleware
-
+app.use(express.json());
 
 
 //  routes
+app.use("/api/messages", messageRoutes);
 
 
 
