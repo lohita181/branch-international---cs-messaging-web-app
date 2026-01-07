@@ -5,7 +5,7 @@ const messageSchema = new mongoose.Schema({
     userName : {type:String, required: true},
     messageText : {type:String, required: true},
     urgency : {type: String, enum:["high","medium","low"]},
-    status: {type:String, enum:["replied","open"], default:"open"},
+    status: {type:String, enum:["replied","open","in progress"], default:"open"},
     agentReply: String,
     createdAt: {type:Date, default:Date.now},
     repliedAt: Date
