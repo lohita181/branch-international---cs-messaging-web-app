@@ -23,7 +23,7 @@ export default function Login() {
   return (
     <div className="login-container">
       <form className="login-card" onSubmit={handleLogin}>
-        <h2 className="login-title">CS Messaging System</h2>
+        <h2 className="login-title">CS Messaging App</h2>
         {/* <p>Agent Login</p> */}
 
         <input

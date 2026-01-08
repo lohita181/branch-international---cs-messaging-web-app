@@ -12,7 +12,9 @@ export default function MainPage(){
     const [messages, setMessages] = useState([]);
     const [expandedId, setExpandedId] = useState(null);
     const [replyText, setReplyText] = useState("");
-    const [searchQuery, setSearchQuery] = useState("");
+    const [customerSearch, setCustomerSearch] = useState("");
+    const [messageSearch, setMessageSearch] = useState("");
+
     const [activeTab, setActiveTab] = useState("open"); 
     const agent = JSON.parse(localStorage.getItem("agent"));
     const navigate = useNavigate();
@@ -64,17 +66,23 @@ export default function MainPage(){
     };
 
     const filteredMessages = messages.filter((msg) => {
-    const query = searchQuery.toLowerCase();
-    const matchesSearch =
-        msg.userName.toLowerCase().includes(query) ||
-        msg.messageText.toLowerCase().includes(query);
+        const matchesCustomer =
+            msg.userName
+            .toLowerCase()
+            .includes(customerSearch.toLowerCase());
 
-    const matchesTab =
-        (activeTab === "open" && !msg.agentReply) ||
-        (activeTab === "history" && msg.agentReply);
+        const matchesMessage =
+            msg.messageText
+            .toLowerCase()
+            .includes(messageSearch.toLowerCase());
 
-    return matchesSearch && matchesTab;
+        const matchesTab =
+            (activeTab === "open" && !msg.agentReply) ||
+            (activeTab === "history" && msg.agentReply);
+
+        return matchesCustomer && matchesMessage && matchesTab;
     });
+
 
     const sortedMessages = [...filteredMessages].sort((a, b) => {
     if (activeTab === "open") {
@@ -108,22 +116,22 @@ export default function MainPage(){
                 </span>
             </div>
 
-            <div className="header-right">
-                <div className="profile-wrapper">
-                <span className="profile-icon">👤</span>
+                <div className="header-right">
+                    <div className="profile-wrapper">
+                    <span className="profile-icon">👤</span>
 
-                <div className="profile-tooltip">
-                    <p><strong>{agent?.name}</strong></p>
-                    <p>{agent?.email}</p>
+                    <div className="profile-tooltip">
+                        <p><strong>{agent?.name}</strong></p>
+                        <p>{agent?.email}</p>
 
-                    <hr />
+                        <hr />
 
-                    <button className="logout-btn" onClick={handleLogout}>
-                    Logout
-                    </button>
+                        <button className="logout-btn" onClick={handleLogout}>
+                        Logout
+                        </button>
+                    </div>
+                    </div>
                 </div>
-                </div>
-            </div>
             </div>
 
 
@@ -131,11 +139,19 @@ export default function MainPage(){
         <div className="filters">
         <input
             type="text"
-            placeholder="Search by customer or message..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search by customer name..."
+            value={customerSearch}
+            onChange={(e) => setCustomerSearch(e.target.value)}
+        />
+
+        <input
+            type="text"
+            placeholder="Search by message text..."
+            value={messageSearch}
+            onChange={(e) => setMessageSearch(e.target.value)}
         />
         </div>
+
 
         {/* Messages */}
         {sortedMessages.map((msg) => {

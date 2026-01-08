@@ -2,7 +2,7 @@ import express from "express";
 import Message from "../models/Message.js";
 
 export const createMessage = async(req, res) => {
-    const { urgencyScore, urgencyLevel } = determineUrgency(req.body.messageText);
+    const { urgencyLevel } = determineUrgency(req.body.messageText);
     const message = await Message.create({
       ...req.body,
       urgency: urgencyLevel,
@@ -85,7 +85,6 @@ function determineUrgency(messageText) {
   else if (score >= 3) level = "medium";
 
   return {
-    urgencyScore: score,
     urgencyLevel: level
   };
 }
