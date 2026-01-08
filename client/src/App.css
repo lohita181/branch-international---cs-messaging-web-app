@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+}
+
+
 body {
   margin: 0;
   background: rgb(160, 157, 157);
@@ -106,6 +111,49 @@ body {
 }
 
 
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.profile-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile-icon {
+  font-size: 20px;
+}
+
+.profile-tooltip {
+  position: absolute;
+  right: 0;
+  top: 28px;
+  background: white;
+  padding: 10px 12px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  white-space: nowrap;
+  display: none;
+  z-index: 10;
+}
+
+.profile-tooltip p {
+  margin: 0;
+  font-size: 13px;
+  color: #333;
+}
+
+.profile-tooltip p:first-child {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+/* SHOW ON HOVER */
+.profile-wrapper:hover .profile-tooltip {
+  display: block;
+}
+
 /* Filters */
 .filters {
   background: #ffffff;
@@ -179,3 +227,74 @@ button {
 button:hover {
   background: #1a68d1;
 }
+/* ===== Profile (Non-intrusive) ===== */
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.profile-wrapper {
+  position: relative;
+  margin-left: 15px; /* spacing from tabs */
+  cursor: pointer;
+}
+
+.profile-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* Tooltip box */
+.profile-tooltip {
+  position: absolute;
+  top: 32px;
+  right: 0;
+  background: #ffffff;
+  padding: 10px 12px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
+  display: none;
+  z-index: 1000; /* ensures it stays on top */
+}
+
+/* Tooltip text */
+.profile-tooltip p {
+  margin: 0;
+  font-size: 13px;
+  color: #333;
+}
+
+.profile-tooltip p:first-child {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+/* Hover behavior */
+.profile-wrapper:hover .profile-tooltip {
+  display: block;
+}
+
+.logout-btn {
+  margin-top: 8px;
+  width: 100%;
+  padding: 6px;
+  font-size: 13px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #c0392b;
+}
+
+.profile-tooltip hr {
+  margin: 8px 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
